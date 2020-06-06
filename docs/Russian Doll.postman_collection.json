@@ -7,6 +7,35 @@
 	"item": [
 		{
 			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ae19db0-b0ad-41a9-8241-18944c0c4e4b",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody)",
+							"",
+							"",
+							"var old_id = pm.environment.get(\"russian_doll_id\")",
+							"postman.setEnvironmentVariable(\"old_russian_doll_id\", old_id)",
+							"",
+							"postman.setEnvironmentVariable(\"russian_doll_id\", jsonData.id)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f79cdbf2-ab32-4d7b-98b7-54c7e9e7c48d",
+						"exec": [
+							"var name = Math.ceil(Math.random() * 1000000000000)",
+							"postman.setEnvironmentVariable(\"russian_name\", name)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -19,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"parent_id\": \"2\",\n\t\"name\": \"russialDoll3\"\n}",
+					"raw": "{\n\t\"name\": \"{{russian_name}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -67,7 +96,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll/1",
+					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -76,7 +105,7 @@
 					"path": [
 						"api",
 						"russian-doll",
-						"1"
+						"{{russian_doll_id}}"
 					]
 				}
 			},
@@ -104,7 +133,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll/1",
+					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -113,7 +142,7 @@
 					"path": [
 						"api",
 						"russian-doll",
-						"1"
+						"{{russian_doll_id}}"
 					]
 				}
 			},
@@ -125,7 +154,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll/1",
+					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -134,7 +163,109 @@
 					"path": [
 						"api",
 						"russian-doll",
-						"1"
+						"{{russian_doll_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add to Russian Doll",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ae19db0-b0ad-41a9-8241-18944c0c4e4b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}/russian-doll/{{old_russian_doll_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"russian-doll",
+						"{{russian_doll_id}}",
+						"russian-doll",
+						"{{old_russian_doll_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove from Russial Doll",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ae19db0-b0ad-41a9-8241-18944c0c4e4b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}/russian-doll/{{old_russian_doll_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"russian-doll",
+						"{{russian_doll_id}}",
+						"russian-doll",
+						"{{old_russian_doll_id}}"
 					]
 				}
 			},
