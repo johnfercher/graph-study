@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/johnfercher/graph-study/russiandoll/controllers"
 	"log"
