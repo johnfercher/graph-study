@@ -3,7 +3,7 @@ USE Graph;
 CREATE TABLE IF NOT EXISTS `vertex`
 (
     `id`             VARCHAR(36) NOT NULL,
-    `name`           VARCHAR(30) NOT NULL,
+    `type`           VARCHAR(30) NOT NULL,
 
     PRIMARY KEY (`id`)
 

@@ -26,13 +26,13 @@ func main() {
 	for results.Next() {
 		var vertex entity.Vertex
 		// for each row, scan the result into our tag composite object
-		err = results.Scan(&vertex.Id, &vertex.Name)
+		err = results.Scan(&vertex.Id, &vertex.Type)
 		if err != nil {
 			panic(err.Error()) // proper error handling instead of panic in your app
 		}
 
-		// and then print out the tag's Name attribute
-		log.Printf(vertex.Name)
+		// and then print out the tag's Type attribute
+		log.Printf(vertex.Type)
 	}
 
 }

@@ -33,7 +33,7 @@ func (self *GraphRepository) GetVertexById(ctx context.Context, id string) (*ent
     FROM edge cp2
              INNER JOIN get_vertices o on o.vertex_id = cp2.parent_id
 )
-SELECT c.id, c.name, parent_id
+SELECT c.id, c.type, parent_id
 FROM get_vertices gc
          JOIN vertex c on c.id = gc.vertex_id`, id))
 	if err != nil {
@@ -42,18 +42,18 @@ FROM get_vertices gc
 
 	vertices := make(map[string]entity.Vertex)
 	var idRead sql.NullString
-	var name sql.NullString
+	var vertexType sql.NullString
 	var parentId sql.NullString
 
 	for results.Next() {
-		err = results.Scan(&idRead, &name, &parentId)
+		err = results.Scan(&idRead, &vertexType, &parentId)
 		if err != nil {
 			return nil, err
 		}
 
 		vertex := entity.Vertex{
 			Id:       idRead.String,
-			Name:     name.String,
+			Type:     vertexType.String,
 			ParentId: parentId.String,
 		}
 
@@ -66,7 +66,7 @@ FROM get_vertices gc
 }
 
 func (self *GraphRepository) GetAllVertices(ctx context.Context) ([]*entity.Vertex, error) {
-	results, err := self.db.QueryContext(ctx, `SELECT id, name, parent_id FROM vertex LEFT JOIN edge as p ON p.vertex_id = id`)
+	results, err := self.db.QueryContext(ctx, `SELECT id, type, parent_id FROM vertex LEFT JOIN edge as p ON p.vertex_id = id`)
 	if err != nil {
 		return nil, err
 	}
@@ -75,17 +75,17 @@ func (self *GraphRepository) GetAllVertices(ctx context.Context) ([]*entity.Vert
 
 	for results.Next() {
 		var idRead sql.NullString
-		var name sql.NullString
+		var vertexType sql.NullString
 		var parentId sql.NullString
 
-		err = results.Scan(&idRead, &name, &parentId)
+		err = results.Scan(&idRead, &vertexType, &parentId)
 		if err != nil {
 			return nil, err
 		}
 
 		vertex := &entity.Vertex{
 			Id:       idRead.String,
-			Name:     name.String,
+			Type:     vertexType.String,
 			ParentId: parentId.String,
 		}
 
@@ -96,7 +96,7 @@ func (self *GraphRepository) GetAllVertices(ctx context.Context) ([]*entity.Vert
 }
 
 func (self *GraphRepository) CreateVertex(ctx context.Context, vertex *entity.Vertex) error {
-	_, err := self.db.ExecContext(ctx, fmt.Sprintf(`INSERT INTO vertex (id, name) values ('%s', '%s')`, vertex.Id, vertex.Name))
+	_, err := self.db.ExecContext(ctx, fmt.Sprintf(`INSERT INTO vertex (id, type) values ('%s', '%s')`, vertex.Id, vertex.Type))
 	if err != nil {
 		return err
 	}
@@ -105,7 +105,7 @@ func (self *GraphRepository) CreateVertex(ctx context.Context, vertex *entity.Ve
 }
 
 func (self *GraphRepository) UpdateVertex(ctx context.Context, vertex *entity.Vertex) error {
-	_, err := self.db.ExecContext(ctx, fmt.Sprintf(`UPDATE vertex SET name = '%s' WHERE id = '%s'`, vertex.Name, vertex.Id))
+	_, err := self.db.ExecContext(ctx, fmt.Sprintf(`UPDATE vertex SET type = '%s' WHERE id = '%s'`, vertex.Type, vertex.Id))
 	if err != nil {
 		return err
 	}
