@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker build -t russian-doll-backend .
+sudo docker build -t graph-backend .

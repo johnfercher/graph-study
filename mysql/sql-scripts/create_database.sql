@@ -1,1 +1,1 @@
-CREATE DATABASE RussialDoll;
+CREATE DATABASE Graph;

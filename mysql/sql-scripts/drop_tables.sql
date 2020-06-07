@@ -1,4 +1,4 @@
-USE RussianDoll;
+USE Graph;
 
-DROP TABLE russian_doll;
-DROP TABLE russial_doll_parent;
+DROP TABLE vertex;
+DROP TABLE edge;

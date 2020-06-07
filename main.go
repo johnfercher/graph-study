@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/johnfercher/graph-study/russiandoll/infra"
-	"github.com/johnfercher/graph-study/russiandoll/repositories"
-	"github.com/johnfercher/graph-study/russiandoll/services"
+	"github.com/johnfercher/graph-study/graph/infra"
+	"github.com/johnfercher/graph-study/graph/repository"
+	"github.com/johnfercher/graph-study/graph/service"
 	"log"
 	"net/http"
 )
@@ -20,21 +20,21 @@ func main() {
 	}
 
 	// Repositories
-	repository := repositories.NewRussianDollRepository(db)
+	repository := repository.NewGraphRepository(db)
 
 	// Services
-	service := services.NewRussianDollService(repository)
+	service := service.NewGraphService(repository)
 
 	// CRUD
-	router.HandleFunc("/api/russian-doll", service.GetAll).Methods("GET")
-	router.HandleFunc("/api/russian-doll/{id}", service.GetById).Methods("GET")
-	router.HandleFunc("/api/russian-doll", service.Create).Methods("POST")
-	router.HandleFunc("/api/russian-doll/{id}", service.Update).Methods("PUT")
-	router.HandleFunc("/api/russian-doll/{id}", service.Delete).Methods("DELETE")
+	router.HandleFunc("/api/vertices", service.GetAllVertices).Methods("GET")
+	router.HandleFunc("/api/vertices/{id}", service.GetVertexById).Methods("GET")
+	router.HandleFunc("/api/vertices", service.CreateVertex).Methods("POST")
+	router.HandleFunc("/api/vertices/{id}", service.UpdateVertex).Methods("PUT")
+	router.HandleFunc("/api/vertices/{id}", service.DeleteVertex).Methods("DELETE")
 
 	// Relations
-	router.HandleFunc("/api/russian-doll/{parent_id}/russian-doll/{id}", service.AddToRussianDoll).Methods("POST")
-	router.HandleFunc("/api/russian-doll/{parent_id}/russian-doll/{id}", service.RemoveFromRussianDoll).Methods("DELETE")
+	router.HandleFunc("/api/vertices/{parent_id}/vertices/{id}", service.DeleteEdge).Methods("DELETE")
+	router.HandleFunc("/api/vertices/{parent_id}/vertices/{id}", service.CreateEdge).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

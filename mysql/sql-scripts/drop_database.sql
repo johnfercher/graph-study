@@ -1,1 +1,1 @@
-DROP DATABASE RussianDoll;
+DROP DATABASE Graph;

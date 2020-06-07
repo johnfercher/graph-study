@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker build -t russian-doll-db .
+sudo docker build -t graph-db .

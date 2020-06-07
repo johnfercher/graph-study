@@ -1,6 +1,6 @@
-USE RussianDoll;
+USE Graph;
 
-CREATE TABLE IF NOT EXISTS `russian_doll`
+CREATE TABLE IF NOT EXISTS `vertex`
 (
     `id`             VARCHAR(36) NOT NULL,
     `name`           VARCHAR(30) NOT NULL,
@@ -11,12 +11,12 @@ CREATE TABLE IF NOT EXISTS `russian_doll`
   DEFAULT CHARACTER SET = UTF8MB4
   COLLATE = utf8mb4_unicode_520_ci;
 
-CREATE TABLE `russian_doll_parent` (
- `russian_doll_id` varchar(36) NOT NULL UNIQUE,
+CREATE TABLE `edge` (
+ `vertex_id` varchar(36) NOT NULL UNIQUE,
  `parent_id` varchar(36) NOT NULL,
- PRIMARY KEY (`russian_doll_id`,`parent_id`),
- CONSTRAINT `fk_rp_russian_doll_id` FOREIGN KEY (`russian_doll_id`) REFERENCES `russian_doll` (`id`) ON DELETE CASCADE,
- CONSTRAINT `fk_rp_parent_id` FOREIGN KEY (`parent_id`) REFERENCES `russian_doll` (`id`) ON DELETE CASCADE
+ PRIMARY KEY (`vertex_id`,`parent_id`),
+ CONSTRAINT `fk_rp_vertex_id` FOREIGN KEY (`vertex_id`) REFERENCES `vertex` (`id`) ON DELETE CASCADE,
+ CONSTRAINT `fk_rp_parent_id` FOREIGN KEY (`parent_id`) REFERENCES `vertex` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = UTF8MB4
 COLLATE = utf8mb4_unicode_520_ci;

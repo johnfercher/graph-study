@@ -1,12 +1,12 @@
 {
 	"info": {
 		"_postman_id": "165721a2-e6ae-4f0b-8478-c946d34166dc",
-		"name": "Russian Doll",
+		"name": "Graph",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Create",
+			"name": "Create Vertex",
 			"event": [
 				{
 					"listen": "test",
@@ -16,10 +16,10 @@
 							"var jsonData = JSON.parse(responseBody)",
 							"",
 							"",
-							"var old_id = pm.environment.get(\"russian_doll_id\")",
-							"postman.setEnvironmentVariable(\"old_russian_doll_id\", old_id)",
+							"var old_id = pm.environment.get(\"vertex_id\")",
+							"postman.setEnvironmentVariable(\"old_vertex_id\", old_id)",
 							"",
-							"postman.setEnvironmentVariable(\"russian_doll_id\", jsonData.id)"
+							"postman.setEnvironmentVariable(\"vertex_id\", jsonData.id)"
 						],
 						"type": "text/javascript"
 					}
@@ -30,7 +30,7 @@
 						"id": "f79cdbf2-ab32-4d7b-98b7-54c7e9e7c48d",
 						"exec": [
 							"var name = Math.ceil(Math.random() * 1000000000000)",
-							"postman.setEnvironmentVariable(\"russian_name\", name)"
+							"postman.setEnvironmentVariable(\"vertex_name\", name)"
 						],
 						"type": "text/javascript"
 					}
@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"{{russian_name}}\"\n}",
+					"raw": "{\n\t\"name\": \"{{vertex_name}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,7 +56,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll",
+					"raw": "http://localhost:8080/api/vertices",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -64,19 +64,19 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"russian-doll"
+						"vertices"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get All",
+			"name": "Get All Vertices",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll",
+					"raw": "http://localhost:8080/api/vertices",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -84,19 +84,19 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"russian-doll"
+						"vertices"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get By Id",
+			"name": "Get Vertex By Id",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}",
+					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -104,15 +104,28 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"russian-doll",
-						"{{russian_doll_id}}"
+						"vertices",
+						"{{vertex_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Update",
+			"name": "Update Vertex",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5be4ce1e-c3b4-4e5f-89e1-de57739400d4",
+						"exec": [
+							"var name = Math.ceil(Math.random() * 1000000000000)",
+							"postman.setEnvironmentVariable(\"vertex_name\", name)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -125,7 +138,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"russianDollX\"\n}",
+					"raw": "{\n\t\"name\": \"{{vertex_name}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -133,7 +146,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}",
+					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -141,20 +154,20 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"russian-doll",
-						"{{russian_doll_id}}"
+						"vertices",
+						"{{vertex_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete",
+			"name": "Delete Vertex",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}",
+					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -162,15 +175,15 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"russian-doll",
-						"{{russian_doll_id}}"
+						"vertices",
+						"{{vertex_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Add to Russian Doll",
+			"name": "Create Edge",
 			"event": [
 				{
 					"listen": "test",
@@ -203,7 +216,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}/russian-doll/{{old_russian_doll_id}}",
+					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}/vertices/{{old_vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -211,17 +224,17 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"russian-doll",
-						"{{russian_doll_id}}",
-						"russian-doll",
-						"{{old_russian_doll_id}}"
+						"vertices",
+						"{{vertex_id}}",
+						"vertices",
+						"{{old_vertex_id}}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Remove from Russial Doll",
+			"name": "Delete Edge",
 			"event": [
 				{
 					"listen": "test",
@@ -254,7 +267,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/russian-doll/{{russian_doll_id}}/russian-doll/{{old_russian_doll_id}}",
+					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}/vertices/{{old_vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -262,10 +275,10 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"russian-doll",
-						"{{russian_doll_id}}",
-						"russian-doll",
-						"{{old_russian_doll_id}}"
+						"vertices",
+						"{{vertex_id}}",
+						"vertices",
+						"{{old_vertex_id}}"
 					]
 				}
 			},

@@ -1,4 +1,4 @@
-USE RussianDoll;
+USE Graph;
 
-DELETE FROM russian_doll;
-DELETE FROM russial_doll_parent;
+DELETE FROM vertex;
+DELETE FROM edge;
