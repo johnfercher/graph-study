@@ -9,7 +9,7 @@ import (
 
 func main() {
 	// Open up our database connection.
-	db, err := sql.Open("mysql", "AdminUser:AdminPassword@tcp(127.0.0.1:3307)/Vertex")
+	db, err := sql.Open("mysql", "AdminUser:AdminPassword@tcp(127.0.0.1:3306)/Vertex")
 
 	// if there is an error opening the connection, handle it
 	if err != nil {
@@ -34,5 +34,4 @@ func main() {
 		// and then print out the tag's Type attribute
 		log.Printf(vertex.Type)
 	}
-
 }

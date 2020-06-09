@@ -6,5 +6,5 @@ import (
 )
 
 func GetMysqlConnection() (*sql.DB, error) {
-	return sql.Open("mysql", "AdminUser:AdminPassword@tcp(127.0.0.1:3307)/Graph")
+	return sql.Open("mysql", "AdminUser:AdminPassword@tcp(mysql:3306)/Graph")
 }

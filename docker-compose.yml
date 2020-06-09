@@ -1,0 +1,44 @@
+version: '3.5'
+
+services:
+  golang:
+    image: graph-backend
+    container_name: golang
+
+    ports:
+      - "8080:8080"
+
+    networks:
+      - prod
+
+    depends_on:
+      - "mysql"
+
+  mysql:
+    image: graph-db
+    container_name: mysql
+
+    expose:
+      - '3306'
+    ports:
+      - "3306:3306"
+
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecret
+      MYSQL_DATABASE: Graph
+      MYSQL_USER: AdminUser
+      MYSQL_PASSWORD: AdminPassword
+      MYSQL_ROOT_HOST: 172.18.0.1
+
+    volumes:
+      - mysql:/var/lib/mysql
+
+    networks:
+      - prod
+
+volumes:
+  mysql:
+
+networks:
+  prod:
+    driver: bridge

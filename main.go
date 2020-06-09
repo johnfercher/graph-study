@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/johnfercher/graph-study/graph/infra"
 	"github.com/johnfercher/graph-study/graph/repository"
@@ -35,6 +36,8 @@ func main() {
 	// Relations
 	router.HandleFunc("/mysql/vertices/{parent_id}/vertices/{id}", service.DeleteEdge).Methods("DELETE")
 	router.HandleFunc("/mysql/vertices/{parent_id}/vertices/{id}", service.CreateEdge).Methods("POST")
+
+	fmt.Println("API ON")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

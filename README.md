@@ -63,7 +63,7 @@ $ docker stop <container_id>
 
 ## Queries
 
-### Find All Nodes Recursively Starting From an Id
+### Recursive Tree
 **SQL**
 ```sql
 WITH RECURSIVE get_vertices AS (
@@ -73,7 +73,7 @@ WITH RECURSIVE get_vertices AS (
     FROM vertex as c
              LEFT JOIN edge cp on cp.vertex_id = c.id
     WHERE
-            c.id = '77d0b81c-612a-4a5a-919f-2f7f6e4de91d'
+            c.id = 'c37e04a4-01e6-4b6f-bb34-94bc60dd1495'
     UNION ALL
     SELECT
         cp2.vertex_id
@@ -89,12 +89,24 @@ Response: Array
 
 **Cypher**
 ```cypher
-MATCH p = (r:Vertex {id: "77d0b81c-612a-4a5a-919f-2f7f6e4de91d"})-[*]->(x)
+MATCH p = (r:Vertex {id: "c37e04a4-01e6-4b6f-bb34-94bc60dd1495"})-[:has]->(x)
 WHERE NOT ((x)-->())
 RETURN nodes(p) AS Vertices, relationships(p) AS Edges
 ```
 Response: Tree
 
+### Outgoing Relations
+**SQL**
+```
+TODO
+```
+Response: Number
+
+**Cypher**
+```cypher
+MATCH (v:Vertex)-[r]->() WHERE v.id = 'c37e04a4-01e6-4b6f-bb34-94bc60dd1495s' RETURN COUNT(r)
+```
+Response: Number
+
 ## TODO
-- Execute API inside docker;
-- Execute projects with docker-compose;
+- Access Neo4j from Golang API inside a docker container
