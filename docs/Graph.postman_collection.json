@@ -71,14 +71,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/vertices",
+					"raw": "http://localhost:8080/mysql/vertices",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
+						"mysql",
 						"vertices"
 					]
 				}
@@ -91,14 +91,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/vertices",
+					"raw": "http://localhost:8080/mysql/vertices",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
+						"mysql",
 						"vertices"
 					]
 				}
@@ -111,14 +111,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/vertices/c37e04a4-01e6-4b6f-bb34-94bc60dd1495",
+					"raw": "http://localhost:8080/mysql/vertices/c37e04a4-01e6-4b6f-bb34-94bc60dd1495",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
+						"mysql",
 						"vertices",
 						"c37e04a4-01e6-4b6f-bb34-94bc60dd1495"
 					]
@@ -175,14 +175,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}",
+					"raw": "http://localhost:8080/mysql/vertices/{{vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
+						"mysql",
 						"vertices",
 						"{{vertex_id}}"
 					]
@@ -196,14 +196,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}",
+					"raw": "http://localhost:8080/mysql/vertices/{{vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
+						"mysql",
 						"vertices",
 						"{{vertex_id}}"
 					]
@@ -245,14 +245,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}/vertices/{{old_vertex_id}}",
+					"raw": "http://localhost:8080/mysql/vertices/{{vertex_id}}/vertices/{{old_vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
+						"mysql",
 						"vertices",
 						"{{vertex_id}}",
 						"vertices",
@@ -296,14 +296,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}/vertices/{{old_vertex_id}}",
+					"raw": "http://localhost:8080/mysql/vertices/{{vertex_id}}/vertices/{{old_vertex_id}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"api",
+						"mysql",
 						"vertices",
 						"{{vertex_id}}",
 						"vertices",

@@ -10,9 +10,10 @@ calls both databases and saves information. The API was written in Golang and he
 ## Data
 | Id | Type | ParentId |
 |---|---|---|
-| c37e04a4-01e6-4b6f-bb34-94bc60dd1495 | A | NULL | // Root
+| c37e04a4-01e6-4b6f-bb34-94bc60dd1495 | A (Root) | NULL |
 | 77d0b81c-612a-4a5a-919f-2f7f6e4de91d | B | c37e04a4-01e6-4b6f-bb34-94bc60dd1495 |
 | 4ab50ac3-6ec6-421a-8b27-4687f7bc6572 | B | c37e04a4-01e6-4b6f-bb34-94bc60dd1495 |
+| ... | ... | ... |
 
 ## MySQL
 
