@@ -26,15 +26,15 @@ func main() {
 	service := service.NewGraphService(repository)
 
 	// CRUD
-	router.HandleFunc("/api/vertices", service.GetAllVertices).Methods("GET")
-	router.HandleFunc("/api/vertices/{id}", service.GetVertexById).Methods("GET")
-	router.HandleFunc("/api/vertices", service.CreateVertex).Methods("POST")
-	router.HandleFunc("/api/vertices/{id}", service.UpdateVertex).Methods("PUT")
-	router.HandleFunc("/api/vertices/{id}", service.DeleteVertex).Methods("DELETE")
+	router.HandleFunc("/mysql/vertices", service.GetAllVertices).Methods("GET")
+	router.HandleFunc("/mysql/vertices/{id}", service.GetVertexById).Methods("GET")
+	router.HandleFunc("/mysql/vertices", service.CreateVertex).Methods("POST")
+	router.HandleFunc("/mysql/vertices/{id}", service.UpdateVertex).Methods("PUT")
+	router.HandleFunc("/mysql/vertices/{id}", service.DeleteVertex).Methods("DELETE")
 
 	// Relations
-	router.HandleFunc("/api/vertices/{parent_id}/vertices/{id}", service.DeleteEdge).Methods("DELETE")
-	router.HandleFunc("/api/vertices/{parent_id}/vertices/{id}", service.CreateEdge).Methods("POST")
+	router.HandleFunc("/mysql/vertices/{parent_id}/vertices/{id}", service.DeleteEdge).Methods("DELETE")
+	router.HandleFunc("/mysql/vertices/{parent_id}/vertices/{id}", service.CreateEdge).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

@@ -7,6 +7,13 @@ and the second solution uses a [Neo4j](https://neo4j.com/) database, which is gr
 The idea is to compare the performance from both approaches to solve common graph problems. There is a REST API which
 calls both databases and saves information. The API was written in Golang and here is the [postman collection](docs).
 
+## Data
+| Id | Type | ParentId |
+|---|---|---|
+| c37e04a4-01e6-4b6f-bb34-94bc60dd1495 | A | NULL | // Root
+| 77d0b81c-612a-4a5a-919f-2f7f6e4de91d | B | c37e04a4-01e6-4b6f-bb34-94bc60dd1495 |
+| 4ab50ac3-6ec6-421a-8b27-4687f7bc6572 | B | c37e04a4-01e6-4b6f-bb34-94bc60dd1495 |
+
 ## MySQL
 
 ### Config
@@ -86,3 +93,7 @@ WHERE NOT ((x)-->())
 RETURN nodes(p) AS Vertices, relationships(p) AS Edges
 ```
 Response: Tree
+
+## TODO
+- Execute API inside docker;
+- Execute projects with docker-compose;
