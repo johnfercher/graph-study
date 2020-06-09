@@ -1,5 +1,29 @@
 # graph-study
 
+## MySQL
+
+### Config
+```
+$ cd mysql
+$ bash build.sh
+$ bash run.sh
+$ docker ps // obtain the <container_id>
+$ bash initdb.sh
+Container ID: <container_id>
+```
+
+## Neo4j
+
+### Config
+```
+$ cd neo4j
+$ bash build.sh
+$ bash run.sh
+$ docker ps // obtain the <container_id>
+$ bash initdb.sh
+Container ID: <container_id>
+```
+
 ## Queries
 
 ### Find All Nodes Recursively Starting From an Id

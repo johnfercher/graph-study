@@ -851,6 +851,9 @@ MATCH (d:Vertex), (e:Vertex) WHERE d.id = 'f6043837-d32a-4a59-9c2f-ce8647a37a01'
 CREATE (e:Vertex {id: '39dfc172-c8ab-49f5-9c0a-b70dbe9f4a6d', type: 'E'});
 MATCH (d:Vertex), (e:Vertex) WHERE d.id = 'f6043837-d32a-4a59-9c2f-ce8647a37a01' AND e.id = '39dfc172-c8ab-49f5-9c0a-b70dbe9f4a6d' CREATE (d)-[:has]->(e);
 CREATE (e:Vertex {id: 'cdfff020-17df-45c5-b884-6ce91a9a31df', type: 'E'});
+
+
+
 MATCH (d:Vertex), (e:Vertex) WHERE d.id = 'f6043837-d32a-4a59-9c2f-ce8647a37a01' AND e.id = 'cdfff020-17df-45c5-b884-6ce91a9a31df' CREATE (d)-[:has]->(e);
 CREATE (e:Vertex {id: 'fdce255e-7767-4e4c-9cba-13995c1f17a5', type: 'E'});
 MATCH (d:Vertex), (e:Vertex) WHERE d.id = 'f6043837-d32a-4a59-9c2f-ce8647a37a01' AND e.id = 'fdce255e-7767-4e4c-9cba-13995c1f17a5' CREATE (d)-[:has]->(e);
