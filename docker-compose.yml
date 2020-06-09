@@ -1,18 +1,19 @@
 version: '3.5'
 
 services:
-  golang:
-    image: graph-backend
-    container_name: golang
+  #golang:
+    #image: graph-backend
+    #container_name: golang
 
-    ports:
-      - "8080:8080"
+    #ports:
+      #- "8080:8080"
 
-    networks:
-      - prod
+    #networks:
+      #- prod
 
-    depends_on:
-      - "mysql"
+    #depends_on:
+      #- "mysql"
+      #- "neo4j"
 
   mysql:
     image: graph-db
@@ -36,8 +37,30 @@ services:
     networks:
       - prod
 
+  neo4j:
+    image: graph-neo4j
+    container_name: neo4j
+
+    environment:
+      NEO4J_AUTH: "none"
+
+    expose:
+      - '7474'
+      - '7687'
+
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+
+    volumes:
+      - neo4j:/neo4j/data
+
+    networks:
+      - prod
+
 volumes:
   mysql:
+  neo4j:
 
 networks:
   prod:

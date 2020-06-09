@@ -110,3 +110,6 @@ Response: Number
 
 ## TODO
 - Access Neo4j from Golang API inside a docker container
+
+## Infos
+- Current Openssl openssl@1.1
