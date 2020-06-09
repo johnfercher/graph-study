@@ -29,8 +29,23 @@
 					"script": {
 						"id": "f79cdbf2-ab32-4d7b-98b7-54c7e9e7c48d",
 						"exec": [
-							"var name = Math.ceil(Math.random() * 1000000000000)",
-							"postman.setEnvironmentVariable(\"vertex_name\", name)"
+							"var number = Math.ceil(Math.random() * 1000000000000)",
+							"",
+							"if (number % 7 === 0) {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"E\")",
+							"} else",
+							"if (number % 5 === 0) {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"D\")",
+							"} else",
+							"if (number % 3 === 0) {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"C\")",
+							"} else",
+							"if (number % 2 === 0) {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"B\")",
+							"} else {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"A\")",
+							"}",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -48,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"{{vertex_name}}\"\n}",
+					"raw": "{\n\t\"type\": \"X\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,7 +111,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/vertices/{{vertex_id}}",
+					"raw": "http://localhost:8080/api/vertices/c37e04a4-01e6-4b6f-bb34-94bc60dd1495",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -105,7 +120,7 @@
 					"path": [
 						"api",
 						"vertices",
-						"{{vertex_id}}"
+						"c37e04a4-01e6-4b6f-bb34-94bc60dd1495"
 					]
 				}
 			},
@@ -119,8 +134,22 @@
 					"script": {
 						"id": "5be4ce1e-c3b4-4e5f-89e1-de57739400d4",
 						"exec": [
-							"var name = Math.ceil(Math.random() * 1000000000000)",
-							"postman.setEnvironmentVariable(\"vertex_name\", name)"
+							"var number = Math.ceil(Math.random() * 1000000000000)",
+							"",
+							"if (number % 7 === 0) {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"E\")",
+							"} else",
+							"if (number % 5 === 0) {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"D\")",
+							"} else",
+							"if (number % 3 === 0) {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"C\")",
+							"} else",
+							"if (number % 2 === 0) {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"B\")",
+							"} else {",
+							"    postman.setEnvironmentVariable(\"vertex_type\", \"A\")",
+							"}"
 						],
 						"type": "text/javascript"
 					}

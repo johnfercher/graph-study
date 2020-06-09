@@ -1,4 +1,11 @@
-# graph-study
+# GraphStudy
+
+This repository contains a graph study, handling specifically trees. Here are two approaches to deal with graphs,
+the first solution uses a [MySQL](mysql.com) database, which contains tables that represents vertices and edges,
+and the second solution uses a [Neo4j](https://neo4j.com/) database, which is graph based.
+
+The idea is to compare the performance from both approaches to solve common graph problems. There is a REST API which
+calls both databases and saves information. The API was written in Golang and here is the [postman collection](docs).
 
 ## MySQL
 
@@ -12,6 +19,17 @@ $ bash initdb.sh
 Container ID: <container_id>
 ```
 
+### Run
+```
+$ bash run.sh
+```
+
+### Stop
+```
+$ docker ps // obtain the <container_id>
+$ docker stop <container_id>
+```
+
 ## Neo4j
 
 ### Config
@@ -22,6 +40,17 @@ $ bash run.sh
 $ docker ps // obtain the <container_id>
 $ bash initdb.sh
 Container ID: <container_id>
+```
+
+### Run
+```
+$ bash run.sh
+```
+
+### Stop
+```
+$ docker ps // obtain the <container_id>
+$ docker stop <container_id>
 ```
 
 ## Queries
