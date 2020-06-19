@@ -1,4 +1,4 @@
 USE Graph;
 
-DELETE FROM vertex;
 DELETE FROM edge;
+DELETE FROM vertex;

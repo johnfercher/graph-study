@@ -1,4 +1,4 @@
 USE Graph;
 
-DROP TABLE vertex;
 DROP TABLE edge;
+DROP TABLE vertex;

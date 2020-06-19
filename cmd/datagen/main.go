@@ -21,7 +21,13 @@ func main() {
 		"c69454bc-de12-49e9-98b5-1259516ae473",
 	}
 
-	f, err := os.Create("test.sql")
+	neo4, err := os.Create("test.cypher")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	mysql, err := os.Create("test.sql")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -31,23 +37,37 @@ func main() {
 		for i := 0; i < qtd; i++ {
 			newId, _ := uuid.NewRandom()
 
-			_, errCreate := f.WriteString(fmt.Sprintf("INSERT INTO vertex (`id`, `type`) VALUES ('%s', 'E');\n", newId))
+			_, errCreate := neo4.WriteString(fmt.Sprintf("CREATE (e:Vertex {id: '%s', type: 'E'});\n", newId))
 			if errCreate != nil {
 				fmt.Println(errCreate)
-				f.Close()
+				neo4.Close()
 				return
 			}
 
-			_, errAdd := f.WriteString(fmt.Sprintf("INSERT INTO edge (`parent_id`, `vertex_id`) VALUES ('%s', '%s');\n", id, newId))
+			_, errAdd := neo4.WriteString(fmt.Sprintf("MATCH (d:Vertex), (e:Vertex) WHERE d.id = '%s' AND e.id = '%s' CREATE (d)-[:has]->(e);\n", id, newId))
 			if errAdd != nil {
 				fmt.Println(errAdd)
-				f.Close()
+				neo4.Close()
+				return
+			}
+
+			_, errCreate = mysql.WriteString(fmt.Sprintf("INSERT INTO vertex (`id`, `type`) VALUES ('%s', 'E');\n", newId))
+			if errCreate != nil {
+				fmt.Println(errCreate)
+				mysql.Close()
+				return
+			}
+
+			_, errAdd = mysql.WriteString(fmt.Sprintf("INSERT INTO edge (`parent_id`, `vertex_id`) VALUES ('%s', '%s');\n", id, newId))
+			if errAdd != nil {
+				fmt.Println(errAdd)
+				mysql.Close()
 				return
 			}
 		}
 	}
 
-	err = f.Close()
+	err = neo4.Close()
 	if err != nil {
 		fmt.Println(err)
 		return
