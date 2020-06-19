@@ -6,17 +6,17 @@ import (
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 	"github.com/johnfercher/graph-study/graph/entity"
-	"github.com/johnfercher/graph-study/graph/repository"
+	"github.com/johnfercher/graph-study/graph/service"
 	"net/http"
 )
 
 type GraphController struct {
-	mysql repository.GraphRepository
+	service service.GraphService
 }
 
-func NewMySqlService(repository repository.GraphRepository) *GraphController {
+func NewGraphController(service service.GraphService) *GraphController {
 	return &GraphController{
-		mysql: repository,
+		service: service,
 	}
 }
 
@@ -26,14 +26,8 @@ func (self *GraphController) CreateEdge(writer http.ResponseWriter, request *htt
 
 	params := mux.Vars(request)
 
-	err := self.mysql.CreateEdge(ctx, params["parent_id"], params["id"])
-
-	if err != nil {
-		json.NewEncoder(writer).Encode(err)
-		return
-	}
-
-	json.NewEncoder(writer).Encode(nil)
+	response := self.service.CreateEdge(ctx, params["parent_id"], params["id"])
+	json.NewEncoder(writer).Encode(response)
 }
 
 func (self *GraphController) DeleteEdge(writer http.ResponseWriter, request *http.Request) {
@@ -42,14 +36,8 @@ func (self *GraphController) DeleteEdge(writer http.ResponseWriter, request *htt
 
 	params := mux.Vars(request)
 
-	err := self.mysql.DeleteEdge(ctx, params["parent_id"], params["id"])
-
-	if err != nil {
-		json.NewEncoder(writer).Encode(err)
-		return
-	}
-
-	json.NewEncoder(writer).Encode(nil)
+	response := self.service.DeleteEdge(ctx, params["parent_id"], params["id"])
+	json.NewEncoder(writer).Encode(response)
 }
 
 func (self *GraphController) UpdateVertex(writer http.ResponseWriter, request *http.Request) {
@@ -66,13 +54,8 @@ func (self *GraphController) UpdateVertex(writer http.ResponseWriter, request *h
 	params := mux.Vars(request)
 	vertex.Id = params["id"]
 
-	err = self.mysql.UpdateVertex(ctx, vertex)
-	if err != nil {
-		json.NewEncoder(writer).Encode(err)
-		return
-	}
-
-	json.NewEncoder(writer).Encode(vertex)
+	response := self.service.UpdateVertex(ctx, vertex)
+	json.NewEncoder(writer).Encode(response)
 }
 
 func (self *GraphController) CreateVertex(writer http.ResponseWriter, request *http.Request) {
@@ -89,13 +72,8 @@ func (self *GraphController) CreateVertex(writer http.ResponseWriter, request *h
 	id, _ := uuid.NewRandom()
 	vertex.Id = id.String()
 
-	err = self.mysql.CreateVertex(ctx, vertex)
-	if err != nil {
-		json.NewEncoder(writer).Encode(err)
-		return
-	}
-
-	json.NewEncoder(writer).Encode(vertex)
+	response := self.service.CreateVertex(ctx, vertex)
+	json.NewEncoder(writer).Encode(response)
 }
 
 func (self *GraphController) GetVertexById(writer http.ResponseWriter, request *http.Request) {
@@ -104,14 +82,8 @@ func (self *GraphController) GetVertexById(writer http.ResponseWriter, request *
 
 	params := mux.Vars(request)
 
-	vertex, err := self.mysql.GetVertexById(ctx, params["id"])
-
-	if err != nil {
-		json.NewEncoder(writer).Encode(err)
-		return
-	}
-
-	json.NewEncoder(writer).Encode(vertex)
+	response := self.service.GetVertexById(ctx, params["id"])
+	json.NewEncoder(writer).Encode(response)
 }
 
 func (self *GraphController) GetAllVertices(writer http.ResponseWriter, request *http.Request) {
@@ -119,14 +91,8 @@ func (self *GraphController) GetAllVertices(writer http.ResponseWriter, request 
 
 	ctx := context.TODO()
 
-	vertices, err := self.mysql.GetAllVertices(ctx)
-
-	if err != nil {
-		json.NewEncoder(writer).Encode(err)
-		return
-	}
-
-	json.NewEncoder(writer).Encode(vertices)
+	response := self.service.GetAllVertices(ctx)
+	json.NewEncoder(writer).Encode(response)
 }
 
 func (self *GraphController) DeleteVertex(writer http.ResponseWriter, request *http.Request) {
@@ -135,12 +101,6 @@ func (self *GraphController) DeleteVertex(writer http.ResponseWriter, request *h
 
 	params := mux.Vars(request)
 
-	err := self.mysql.DeleteVertex(ctx, params["id"])
-
-	if err != nil {
-		json.NewEncoder(writer).Encode(err)
-		return
-	}
-
-	json.NewEncoder(writer).Encode(nil)
+	response := self.service.DeleteVertex(ctx, params["id"])
+	json.NewEncoder(writer).Encode(response)
 }
