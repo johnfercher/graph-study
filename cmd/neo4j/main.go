@@ -37,7 +37,7 @@ func helloWorld(uri, username, password string) (interface{}, error) {
 	}
 	defer driver.Close()
 
-	session, err = driver.Session(neo4j.AccessModeWrite)
+	session, err = driver.Session(neo4j.AccessModeRead)
 	if err != nil {
 		return "", err
 	}

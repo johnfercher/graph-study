@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/johnfercher/graph-study/graph/controller"
 	"github.com/johnfercher/graph-study/graph/infra"
 	"github.com/johnfercher/graph-study/graph/repository"
-	"github.com/johnfercher/graph-study/graph/service"
 	"log"
 	"net/http"
 )
@@ -15,27 +15,32 @@ func main() {
 	router := mux.NewRouter()
 
 	// Infra
-	db, err := infra.GetMysqlConnection()
+	mysql, err := infra.GetMysqlConnection()
+	if err != nil {
+		panic(err)
+	}
+
+	neo4j, err := infra.GetNeo4jlConnection()
 	if err != nil {
 		panic(err)
 	}
 
 	// Repositories
-	repository := repository.NewGraphRepository(db)
+	mySqlRepository := repository.NewMysqlRepository(mysql)
 
 	// Services
-	service := service.NewGraphService(repository)
+	service := controller.NewMySqlService(mySqlRepository)
 
 	// CRUD
-	router.HandleFunc("/mysql/vertices", service.GetAllVertices).Methods("GET")
-	router.HandleFunc("/mysql/vertices/{id}", service.GetVertexById).Methods("GET")
-	router.HandleFunc("/mysql/vertices", service.CreateVertex).Methods("POST")
-	router.HandleFunc("/mysql/vertices/{id}", service.UpdateVertex).Methods("PUT")
-	router.HandleFunc("/mysql/vertices/{id}", service.DeleteVertex).Methods("DELETE")
+	router.HandleFunc("/api/vertices", service.GetAllVertices).Methods("GET")
+	router.HandleFunc("/api/vertices/{id}", service.GetVertexById).Methods("GET")
+	router.HandleFunc("/api/vertices", service.CreateVertex).Methods("POST")
+	router.HandleFunc("/api/vertices/{id}", service.UpdateVertex).Methods("PUT")
+	router.HandleFunc("/api/vertices/{id}", service.DeleteVertex).Methods("DELETE")
 
 	// Relations
-	router.HandleFunc("/mysql/vertices/{parent_id}/vertices/{id}", service.DeleteEdge).Methods("DELETE")
-	router.HandleFunc("/mysql/vertices/{parent_id}/vertices/{id}", service.CreateEdge).Methods("POST")
+	router.HandleFunc("/api/vertices/{parent_id}/vertices/{id}", service.DeleteEdge).Methods("DELETE")
+	router.HandleFunc("/api/vertices/{parent_id}/vertices/{id}", service.CreateEdge).Methods("POST")
 
 	fmt.Println("API ON")
 
